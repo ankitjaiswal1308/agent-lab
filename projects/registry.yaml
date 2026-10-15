@@ -1,0 +1,10 @@
+# External project registry.
+# Keep source code in the registered project, not inside agent-lab.
+
+projects:
+  - id: staap
+    name: staap
+    path: "E:\\staap"
+    type: app-repo
+    status: external
+    notes: "Registered external app repo; do not move source into agent-lab."

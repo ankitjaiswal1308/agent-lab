@@ -1,0 +1,35 @@
+# Secrets and local machine state
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Model weights and large generated artifacts
+*.gguf
+*.safetensors
+*.bin
+*.onnx
+*.pt
+*.pth
+*.ckpt
+
+# Backups and generated exports
+*.bak
+*.bak-*
+*.html
+
+# Common caches
+__pycache__/
+*.py[cod]
+node_modules/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Tool/editor state
+.idea/
+.vscode/
+*.log
+

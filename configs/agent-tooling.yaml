@@ -1,0 +1,46 @@
+version: 1
+
+subscription_tools:
+  codex:
+    names: ["Codex", "Codex CLI", "codex"]
+    lane: "scoped implementation and verification"
+    wrapper: "scripts/ask-codex.ps1"
+    requires_login: true
+    notes: "Subscription CLI only; no API keys in repo."
+  claude_code:
+    names: ["Claude", "Claude Code", "claude"]
+    lane: "orchestration, review, judgment, handoff"
+    wrapper: "scripts/ask-claude.ps1"
+    requires_login: true
+    notes: "Use for planning, review, and merge/risk calls."
+  cursor:
+    names: ["Cursor", "Cursor CLI", "cursor-agent"]
+    lane: "live IDE pair editing and visual polish"
+    wrapper: "scripts/ask-cursor.ps1"
+    requires_login: true
+    manual_login: "cursor-agent login"
+
+design_tools:
+  claude_design:
+    names: ["Claude Design", "Claudedesign"]
+    lane: "design exploration and visual reasoning"
+    notes: "Generated output must be reviewed before repo integration."
+  open_design:
+    names: ["Open Design"]
+    lane: "local design generation"
+    local_endpoint: "http://localhost:11434/v1"
+    default_model: "gpt-oss:20b"
+
+local_agent_harnesses:
+  ollama:
+    names: ["Ollama"]
+    lane: "local model runtime"
+    config: "configs/local-model-routing.yaml"
+  openclaw:
+    names: ["OpenClaw"]
+    lane: "local agent harness and channel integration"
+    notes: "Do not store bot tokens, channel credentials, or live-action settings."
+  opencode:
+    names: ["OpenCode"]
+    lane: "local/cloud model harness inventory"
+    notes: "Keep provider routing docs here; secrets stay out."

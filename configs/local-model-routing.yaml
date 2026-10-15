@@ -1,0 +1,41 @@
+version: 1
+source: "Imported from D:\\projects\\local-agents\\docs\\local-llm-agent-setup.md decisions, last reviewed 2026-08-21."
+
+ollama:
+  base_url: "http://localhost:11434"
+  openai_compatible_url: "http://localhost:11434/v1"
+  models_path: "D:\\ollama\\models"
+  env:
+    OLLAMA_MODELS: "D:\\ollama\\models"
+    OLLAMA_FLASH_ATTENTION: "1"
+    OLLAMA_KV_CACHE_TYPE: "q8_0"
+
+roles:
+  default_agent_driver:
+    model: "gpt-oss:20b"
+    context_tokens: 65536
+    native_tool_calls: true
+    notes: "Default local loop driver. Verified in source doc as 100% GPU at 64k on RTX 4060 Ti 16 GB."
+  hard_reasoning_vision:
+    model: "qwen3.6"
+    context_tokens: 16384
+    native_tool_calls: true
+    notes: "Cap at 16k. Source doc says 32k crashed the Ollama daemon on this machine."
+  fast_scratch:
+    model: "qwen2.5-7b-32k"
+    context_tokens: 32768
+    native_tool_calls: true
+    notes: "Fast scratch work and lower-stakes local agent checks."
+  embeddings:
+    model: "nomic-embed-text"
+    native_tool_calls: false
+    notes: "Embedding model for RAG and memory."
+
+do_not_use_as_agent_drivers:
+  - model: "qwen2.5-coder:14b"
+    reason: "No native tool_calls field; emits tool call JSON in content."
+  - model: "qwen2.5-coder-14b-16k"
+    reason: "No native tool_calls field; emits tool call JSON in content."
+  - model: "fable-assistant-32k"
+    reason: "Built on coder model behavior; no native tool_calls field."
+
